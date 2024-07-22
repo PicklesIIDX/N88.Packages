@@ -6,14 +6,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Sequencer</RootNamespace>
         <PackageId>N88.Sequencer</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Company>N88</Company>
         <Description>A subscription based FSM used to sequence loops.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - Replaced with release configuration.
+            - added README
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
