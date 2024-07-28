@@ -14,6 +14,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Logging", "N88.Logging\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Logging.Spec", "N88.Logging.Spec\N88.Logging.Spec.csproj", "{A90355A4-FAC0-4BF2-9419-EB78D6126FE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Worlds.Spec", "N88.Worlds.Spec\N88.Worlds.Spec.csproj", "{7CCDA166-5AAC-49D2-B82A-00B755C45740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Worlds", "N88.Worlds\N88.Worlds.csproj", "{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +52,13 @@ Global
 		{A90355A4-FAC0-4BF2-9419-EB78D6126FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A90355A4-FAC0-4BF2-9419-EB78D6126FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A90355A4-FAC0-4BF2-9419-EB78D6126FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCDA166-5AAC-49D2-B82A-00B755C45740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCDA166-5AAC-49D2-B82A-00B755C45740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCDA166-5AAC-49D2-B82A-00B755C45740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCDA166-5AAC-49D2-B82A-00B755C45740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
