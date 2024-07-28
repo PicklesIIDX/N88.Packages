@@ -6,7 +6,7 @@ namespace N88.Logging
     public class ConsoleLogger : ILogger
     {
         private readonly Dictionary<string, LoggingSettings> _categories = new();
-        private readonly LoggingSettings _defaultSettings = new();
+        private readonly LoggingSettings _defaultSettings = new(string.Empty, string.Empty, string.Empty, string.Empty, true);
         
         public const string Black = "#000000";
         public const string DarkBlue = "#000080";
@@ -37,6 +37,7 @@ namespace N88.Logging
         {
             var settings = _defaultSettings; 
             if (!string.IsNullOrEmpty(category) && !_categories.TryGetValue(category, out settings)) return;
+            if(!settings.Enabled){return;}
             Console.ForegroundColor = HexToConsoleColor(settings.Color);
             var timestamp = string.Empty;
             if (!string.IsNullOrEmpty(settings.TimeFormat))

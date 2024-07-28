@@ -98,6 +98,16 @@ namespace N88.Logging.Spec
             _sb.ToString().Should().Be(AnyText);
         }
 
+        [Test]
+        public void Does_not_log_disabled_setting()
+        {
+            var loggingCategory = new LoggingSettings(AnyCategory, string.Empty, AnyColor, string.Empty, false);
+            var logger = new N88.Logging.ConsoleLogger(loggingCategory);
+            logger.Log(AnyText, AnyCategory);
+            
+            _sb.ToString().Should().Be(string.Empty);
+        }
+
         private class TestData
         {
             public static IEnumerable ColorCategoryTestCases()
