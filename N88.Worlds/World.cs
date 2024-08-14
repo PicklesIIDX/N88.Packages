@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// An object to track entities and the components bound to them.
@@ -128,6 +129,7 @@
         /// Returns all entities with a component of type <see cref="T"/>.
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        [return: NotNull]
         public IEnumerable<int> GetEntitiesWithComponent<T>() where T : class
         {
             var type = typeof(T);
