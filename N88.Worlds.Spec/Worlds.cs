@@ -45,6 +45,24 @@ public class Worlds
         _world.TryGetComponentMappedToEntity(entity, out MockComponent? result).Should().Be(true);
         result.Should().Be(component);
     }
+
+    [Test]
+    public void Cannot_output_null_component_when_successful()
+    {
+        var entity = _world.CreateEntity();
+        var nonBoundEntity = _world.CreateEntity();
+        var component = new MockComponent();
+        _world.TryBindComponentToEntity(entity, component);
+        if (_world.TryGetComponentMappedToEntity(entity, out MockComponent? result))
+        {
+            result.Should().NotBeNull();
+        }
+
+        if (!_world.TryGetComponentMappedToEntity(nonBoundEntity, out MockComponent? nullResult))
+        {
+            nullResult.Should().BeNull();
+        }
+    }
     
     [Test]
     public void Can_return_a_component_not_not_bound_to_an_entity()

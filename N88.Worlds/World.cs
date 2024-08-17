@@ -28,14 +28,14 @@
         /// <summary>
         /// Returns a component that is currently active and mapped to an entity. 
         /// </summary>
-        public bool TryGetComponentMappedToEntity<T>(int id, out T? component) where T : class
+        public bool TryGetComponentMappedToEntity<T>(int id, [NotNullWhen(true)] out T? component) where T : class
         {
             component = default;
             if (_components.TryGetValue(typeof(T), out var dictionary))
             {
                 if (dictionary.TryGetValue(id, out var value))
                 {
-                    component = value as T;
+                    component = (T)value;
                     return true;
                 }
             } 
