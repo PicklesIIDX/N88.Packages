@@ -88,6 +88,13 @@ public class Worlds
         entities.Should().ContainInOrder([entity1, entity2, entity3]);
     }
     
+    [Test]
+    public void Can_not_return_null_when_no_entities_have_component()
+    {
+        var result = _world.GetEntitiesWithComponent<MockComponent>();
+        result.Should().NotBeNull();
+    }
+    
     
     [Test]
     public void Can_return_all_components_of_a_type_bound_to_any_entity()
@@ -101,6 +108,13 @@ public class Worlds
 
         var components = _world.GetComponentsForAllEntities<MockComponent>();
         components.Should().ContainInOrder([component1, component2, component3]);
+    }
+
+    [Test]
+    public void Can_not_return_null_when_no_components_bound_to_any_entities()
+    {
+        var result = _world.GetComponentsForAllEntities<MockComponent>();
+        result.Should().NotBeNull();
     }
     
     [Test]

@@ -111,6 +111,7 @@
         /// Get all components of type <see cref="T"/> bound to any entities. 
         /// </summary>
         /// <typeparam name="T"></typeparam>
+        [return: NotNull]
         public IEnumerable<T?> GetComponentsForAllEntities<T>() where T : class
         {
             var type = typeof(T);

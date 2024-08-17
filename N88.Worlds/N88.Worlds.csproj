@@ -7,14 +7,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Worlds</RootNamespace>
         <PackageId>N88.Worlds</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - ensured that GetEntitiesWithComponent cannot return null
+            - ensured that GetComponentsForAllEntities cannot return null
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
