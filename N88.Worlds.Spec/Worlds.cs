@@ -184,6 +184,60 @@ public class Worlds
         
         _world.GetUnboundComponent<MockComponent>().Should().BeEquivalentTo((MockComponent)default!);
     }
+
+    [Test]
+    public void Can_use_structs_as_components()
+    {
+        var originalComponent = new MockStructComponent();
+
+        var entity = _world.CreateEntity();
+        _world.TryBindComponentToEntity(entity, originalComponent);
+
+        var components = _world.GetComponentsForAllEntities<MockStructComponent>();
+        components[0].Id.Should().Be(originalComponent.Id);
+        components[0].Id = 2;
+
+        _world.TryGetComponentMappedToEntity<MockStructComponent>(entity, out var readonlyInstance);
+        readonlyInstance.Id.Should().Be(originalComponent.Id);
+        readonlyInstance.Id = 3;
+        
+        _world.TryGetComponentMappedToEntity<MockStructComponent>(entity, out readonlyInstance);
+        readonlyInstance.Id.Should().Be(originalComponent.Id);
+    }
+    
+    [Test]
+    public void When_component_is_class_can_edit_by_reference()
+    {
+        var originalComponent = new MockComponent();
+
+        var entity = _world.CreateEntity();
+        _world.TryBindComponentToEntity(entity, originalComponent);
+
+        var components = _world.GetComponentsForAllEntities<MockComponent>();
+        components[0].Count.Should().Be(originalComponent.Count);
+        components[0].Count = 2;
+
+        _world.TryGetComponentMappedToEntity<MockComponent>(entity, out var reference);
+        reference.Should().Be(originalComponent);
+        reference.Count.Should().Be(2);
+        originalComponent.Count.Should().Be(2);
+        reference.Count = 3;
+
+        if (_world.TryGetComponentMappedToEntity<MockComponent>(entity, out reference))
+        {
+            reference.Count.Should().Be(3);    
+        }
+    }
+}
+
+public struct MockStructComponent
+{
+    public int Id;
+
+    public MockStructComponent(int id)
+    {
+        Id = id;
+    }
 }
 
 public class MockComponent : IDisposable

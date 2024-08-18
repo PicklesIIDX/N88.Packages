@@ -7,14 +7,15 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Worlds</RootNamespace>
         <PackageId>N88.Worlds</PackageId>
-        <Version>1.0.3</Version>
+        <Version>2.0.0</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - ensured that TryGetComponentMappedToEntity cannot output null if returning true 
+            - added support for struct based components
+            - breaking change: now return arrays when requesting components 
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

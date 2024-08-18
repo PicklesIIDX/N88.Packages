@@ -28,7 +28,11 @@
         /// <summary>
         /// Returns a component that is currently active and mapped to an entity. 
         /// </summary>
-        public bool TryGetComponentMappedToEntity<T>(int id, [NotNullWhen(true)] out T? component) where T : class
+        /// <param name="component">Note that if "T" is a struct, then
+        /// this instance will be readonly. If it's a reference type, then modifying it
+        /// will edit the component.</param>
+        /// <returns></returns>
+        public bool TryGetComponentMappedToEntity<T>(int id, [NotNullWhen(true)] out T? component)
         {
             component = default;
             if (_components.TryGetValue(typeof(T), out var dictionary))
@@ -112,18 +116,23 @@
         /// </summary>
         /// <typeparam name="T"></typeparam>
         [return: NotNull]
-        public IEnumerable<T?> GetComponentsForAllEntities<T>() where T : class
+        public T[] GetComponentsForAllEntities<T>()
         {
             var type = typeof(T);
-            var components = new List<T?>();
+            
             if (_components.TryGetValue(type, out var map))
             {
+                var components = new T[map.Count];
+                var index = 0;
                 foreach (var (_, component) in map)
                 {
-                    components.Add(component as T);
+                    components[index] = (T)component;
+                    index++;
                 }
+                return components;
             }
-            return components;
+
+            return Array.Empty<T>();
         }
 
         /// <summary>
