@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
 
     /// <summary>
     /// An object to track entities and the components bound to them.
@@ -178,6 +179,20 @@
                     return true;
                 }
             }
+            return false;
+        }
+
+        public bool TryGetComponent<T>(out T? component)
+        {
+            if (_components.TryGetValue(typeof(T), out var mapping))
+            {
+                if (mapping.Values.Count > 0)
+                {
+                    component = (T)mapping.Values.First();
+                    return true;
+                }
+            }
+            component = default;
             return false;
         }
     }

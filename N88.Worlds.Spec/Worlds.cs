@@ -228,6 +228,39 @@ public class Worlds
             reference.Count.Should().Be(3);    
         }
     }
+
+    [Test]
+    public void Can_return_single_component()
+    {
+        var component = new MockComponent();
+        var entity = _world.CreateEntity();
+        _world.TryBindComponentToEntity(entity, component);
+        
+        _world.TryGetComponent<MockComponent>(out var retrievedComponent).Should().Be(true);
+        
+        retrievedComponent.Should().Be(component);
+    }
+    
+    [Test]
+    public void Will_provide_default_component_if_not_bound()
+    {
+        _world.TryGetComponent<MockComponent>(out var retrievedComponent).Should().Be(false);
+        
+        retrievedComponent.Should().Be(null);
+    }
+    
+    [Test]
+    public void Will_provide_default_component_if_unbound()
+    {
+        var component = new MockComponent();
+        var entity = _world.CreateEntity();
+        _world.TryBindComponentToEntity(entity, component);
+        _world.TryReleaseComponent<MockComponent>(entity);
+        
+        _world.TryGetComponent<MockComponent>(out var retrievedComponent).Should().Be(false);
+        
+        retrievedComponent.Should().Be(null);
+    }
 }
 
 public struct MockStructComponent
