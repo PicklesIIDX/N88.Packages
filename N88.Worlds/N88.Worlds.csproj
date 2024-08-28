@@ -7,14 +7,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Worlds</RootNamespace>
         <PackageId>N88.Worlds</PackageId>
-        <Version>2.1.0</Version>
+        <Version>2.1.1</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - added single query support 
+            - TryGetComponent will not return null when true 
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

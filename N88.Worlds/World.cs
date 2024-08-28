@@ -182,7 +182,15 @@
             return false;
         }
 
-        public bool TryGetComponent<T>(out T? component)
+        /// <summary>
+        /// Returns the first bound component mapped to an entity.
+        /// Use this only as a convenience when you know there is a
+        /// single instance of a component.
+        /// </summary>
+        /// <param name="component">Not null when returning true.</param>
+        /// <typeparam name="T"></typeparam>
+        /// <returns>true if the component type T is bound to an entity</returns>
+        public bool TryGetComponent<T>([NotNullWhen(true)] out T component)
         {
             if (_components.TryGetValue(typeof(T), out var mapping))
             {
@@ -192,7 +200,7 @@
                     return true;
                 }
             }
-            component = default;
+            component = default!;
             return false;
         }
     }
