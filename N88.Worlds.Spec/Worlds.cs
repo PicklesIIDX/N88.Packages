@@ -204,6 +204,19 @@ public class Worlds
         _world.TryGetComponentMappedToEntity<MockStructComponent>(entity, out readonlyInstance);
         readonlyInstance.Id.Should().Be(originalComponent.Id);
     }
+
+    [Test]
+    public void Can_release_struct_components()
+    {
+        var originalComponent = new MockStructComponent();
+
+        var entity = _world.CreateEntity();
+        _world.TryBindComponentToEntity(entity, originalComponent);
+        _world.TryReleaseComponent<MockStructComponent>(entity);
+
+        var components = _world.GetComponentsForAllEntities<MockStructComponent>();
+        components.Length.Should().Be(0);
+    }
     
     [Test]
     public void When_component_is_class_can_edit_by_reference()

@@ -162,7 +162,7 @@
         /// </summary>
         /// <param name="id">Entity id</param>
         /// <typeparam name="T"></typeparam>
-        public bool TryReleaseComponent<T>(int id) where T : class
+        public bool TryReleaseComponent<T>(int id)
         {
             var type = typeof(T);
             if (_components.TryGetValue(type, out var components))
