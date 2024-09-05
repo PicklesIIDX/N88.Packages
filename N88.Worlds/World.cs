@@ -11,9 +11,16 @@
     /// </summary>
     public class World
     {
+        public const int WorldEntity = 1;
         private readonly Dictionary<Type, Dictionary<int, object>> _components = new();
         private readonly Dictionary<Type, List<object>> _componentPools = new();
         private int _idCounter;
+        private readonly int _worldEntity;
+
+        public World()
+        {
+            _worldEntity = CreateEntity();
+        }
 
         /// <summary>
         /// Entities are just IDs. Creating one increments the counter.
@@ -202,6 +209,11 @@
             }
             component = default!;
             return false;
+        }
+
+        public bool TryBindComponentToWorld<T>(T component)
+        {
+            return TryBindComponentToEntity(_worldEntity, component);
         }
     }
 }

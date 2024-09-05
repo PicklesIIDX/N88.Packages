@@ -13,12 +13,12 @@ namespace N88.Worlds.Spec
         }
 
         [Test]
-        public void Create_entities_in_sequential_id_order_starting_from_one()
+        public void Create_entities_in_sequential_id_order_starting_from_two()
         {
-            _world.CreateEntity().Should().Be(1);
             _world.CreateEntity().Should().Be(2);
             _world.CreateEntity().Should().Be(3);
             _world.CreateEntity().Should().Be(4);
+            _world.CreateEntity().Should().Be(5);
         }
     
         [Test]
@@ -273,6 +273,19 @@ namespace N88.Worlds.Spec
             _world.TryGetComponent<MockComponent>(out var retrievedComponent).Should().Be(false);
         
             retrievedComponent.Should().Be(null);
+        }
+
+        [Test]
+        public void Binds_component_to_world_entity()
+        {
+            var component = new MockComponent();
+            _world.TryBindComponentToWorld(component);
+            
+            _world.TryGetComponent<MockComponent>(out var retrievedComponent).Should().Be(true);
+            retrievedComponent.Should().Be(component);
+            
+            _world.TryGetComponentMappedToEntity(World.WorldEntity, out retrievedComponent).Should().Be(true);
+            retrievedComponent.Should().Be(component);
         }
     }
 

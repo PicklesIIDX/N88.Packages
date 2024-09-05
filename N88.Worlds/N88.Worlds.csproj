@@ -7,14 +7,16 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Worlds</RootNamespace>
         <PackageId>N88.Worlds</PackageId>
-        <Version>2.2.0</Version>
+        <Version>3.0.0</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - Added support to release struct components 
+            - Added support for World Entity
+            - Breaking change: created entities start at 2
+                - this is because the world entity is 1 and is made at creation
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
