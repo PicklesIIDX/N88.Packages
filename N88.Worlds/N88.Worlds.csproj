@@ -7,16 +7,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Worlds</RootNamespace>
         <PackageId>N88.Worlds</PackageId>
-        <Version>3.0.0</Version>
+        <Version>3.0.1</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - Added support for World Entity
-            - Breaking change: created entities start at 2
-                - this is because the world entity is 1 and is made at creation
+            - bumping version just to test nuget packaging
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
