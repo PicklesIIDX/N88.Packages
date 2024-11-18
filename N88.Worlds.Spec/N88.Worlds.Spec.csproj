@@ -19,7 +19,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\N88.Worlds\N88.Worlds.csproj" />
+      <ProjectReference Include="..\N88.Worlds.Core\N88.Worlds.Core.csproj" />
     </ItemGroup>
 
 </Project>

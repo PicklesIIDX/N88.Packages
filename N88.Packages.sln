@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Logging.Spec", "N88.Log
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Worlds.Spec", "N88.Worlds.Spec\N88.Worlds.Spec.csproj", "{7CCDA166-5AAC-49D2-B82A-00B755C45740}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Worlds", "N88.Worlds\N88.Worlds.csproj", "{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "N88.Worlds.Core", "N88.Worlds.Core\N88.Worlds.Core.csproj", "{56FBCBB2-53A2-4887-9207-743A7E1DCD9F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

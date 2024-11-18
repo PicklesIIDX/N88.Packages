@@ -5,8 +5,7 @@
         <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
-        <RootNamespace>N88.Worlds</RootNamespace>
-        <PackageId>N88.Worlds</PackageId>
+        <PackageId>N88.Worlds.Core</PackageId>
         <Version>3.0.1</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>

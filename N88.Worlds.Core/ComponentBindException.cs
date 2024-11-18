@@ -1,4 +1,4 @@
-namespace N88.Worlds
+namespace N88.Worlds.Core
 {
     using System;
 
