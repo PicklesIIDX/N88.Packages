@@ -6,14 +6,14 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
         <PackageId>N88.Worlds.Core</PackageId>
-        <Version>3.0.1</Version>
+        <Version>4.0.0</Version>
         <Company>N88</Company>
         <Description>Barebones ECS entity manager.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - bumping version just to test nuget packaging
+            - updated namespace to .Core
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

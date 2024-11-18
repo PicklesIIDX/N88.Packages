@@ -1,5 +1,6 @@
 namespace N88.Worlds.Spec
 {
+    using Core;
     using FluentAssertions;
 
     public class Worlds
