@@ -2,7 +2,7 @@ namespace N88.Logging.Spec
 {
     using System.Collections;
     using System.Text;
-    using FluentAssertions;
+    using AwesomeAssertions;
     using NUnit.Framework;
 
     public class ConsoleLogger

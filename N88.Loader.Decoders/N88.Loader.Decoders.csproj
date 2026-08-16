@@ -1,23 +1,28 @@
-<Project Sdk="Microsoft.NET.Sdk">
-    
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
-        <RootNamespace>N88.MessageBus</RootNamespace>
-        <PackageId>N88.MessageBus</PackageId>
-        <Version>1.0.1</Version>
+        <RootNamespace>N88.Loader.Decoders</RootNamespace>
+        <PackageId>N88.Loader.Decoders</PackageId>
+        <Version>1.0.0</Version>
         <Company>N88</Company>
-        <Description>A Pub/Sub subscripton model.</Description>
+        <Description>General Decoders for the N88.Loader</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - updated tests to not raise nullable warning
+            - initial commit
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\N88.Loader\N88.Loader.csproj" />
+    </ItemGroup>
+    
     <ItemGroup>
         <None Include="README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>

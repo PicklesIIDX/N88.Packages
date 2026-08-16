@@ -1,19 +1,20 @@
-<Project Sdk="Microsoft.NET.Sdk">
-    
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
     <PropertyGroup>
         <TargetFramework>netstandard2.1</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
-        <RootNamespace>N88.MessageBus</RootNamespace>
-        <PackageId>N88.MessageBus</PackageId>
-        <Version>1.0.1</Version>
+        <RootNamespace>N88.Loader</RootNamespace>
+        <PackageId>N88.Loader</PackageId>
+        <Version>1.0.0</Version>
         <Company>N88</Company>
-        <Description>A Pub/Sub subscripton model.</Description>
+        <Description>Generic asset loader.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - updated tests to not raise nullable warning
+            - initial commit
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>

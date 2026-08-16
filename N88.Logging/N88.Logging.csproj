@@ -24,7 +24,7 @@
     </ItemGroup>
 
     <Target Name="PackAfterBuild" AfterTargets="Build">
-        <Exec Command="dotnet pack -o $(SolutionDir)Packages"/>
+        <Exec Command="dotnet pack -o $(HOME)/dev/.localfeed"/>
     </Target>
 
 </Project>
