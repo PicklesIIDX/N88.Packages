@@ -50,7 +50,7 @@ namespace N88.Loader
                     throw new RegistrationException($"failed to find resolver for type '{typeof(T).FullName}' in {nameof(_registry)}");
                 }
             }
-            var items = await bestAdapter.LoadAsync(key, CancellationToken.None);
+            var items = await bestAdapter.LoadAsync(key, token);
             var itemsOfType = items.OfType<T>();
             var listOfItemsOfType = itemsOfType.ToList();
             return listOfItemsOfType;
