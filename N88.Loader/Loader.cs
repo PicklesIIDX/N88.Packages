@@ -14,13 +14,15 @@ namespace N88.Loader
         private readonly Dictionary<Type, ISourceAdapter> _registry = new();
 
         /// <summary>
-        /// 
+        /// Loads a single object of <typeparam name="T"></typeparam>.
         /// </summary>
-        /// <param name="key"></param>
+        /// <param name="key">The identifier your <see cref="Register{T}"/>ed sources
+        /// require. </param>
         /// <param name="token"></param>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Type of object requested.</typeparam>
         /// <returns></returns>
-        /// <exception cref="LoadException"></exception>
+        /// <exception cref="LoadException">Thrown if the load request returns more than 1
+        /// item. Use <see cref="LoadAllAsync{T}"/> for loading multiple objects.</exception>
         public async Task<T> LoadAsync<T>(string key, CancellationToken token)
         {
             var items = await LoadAllAsync<T>(key, token);
@@ -32,6 +34,17 @@ namespace N88.Loader
             return items[0];
         }
 
+        /// <summary>
+        /// Loads a collection of objects of type <typeparam name="T"></typeparam>.
+        /// </summary>
+        /// <param name="key">The identifier your <see cref="Register{T}"/>ed sources
+        /// require. </param>
+        /// <param name="token">Used to cancel an in progress load.</param>
+        /// <typeparam name="T">Type of object requested.</typeparam>
+        /// <returns>A read only list of loaded objects.</returns>
+        /// <exception cref="RegistrationException">Thrown if there is no registered
+        /// <see cref="ISource{T}"/> that can load the requested type. Uses polymorphism to
+        /// find the best match.</exception>
         public async Task<IReadOnlyList<T>> LoadAllAsync<T>(string key, CancellationToken token)
         {
             if (!_registry.TryGetValue(typeof(T), out var bestAdapter))
@@ -56,12 +69,24 @@ namespace N88.Loader
             return listOfItemsOfType;
         }
 
+        /// <summary>
+        /// Assigns the given <see cref="source"/> to this object's collections for loading from. 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <typeparam name="T">The type that matches the lookup for the load request.</typeparam>
         public void Register<T>(ISource<T> source)
         {
             _registry[typeof(T)] 
                 = new SourceAdapter<T>(source);
         }
 
+        /// <summary>
+        /// Assigns the given source/decoder combo to this object's collection for loading from.
+        /// These pair so that the given decoder will always use the given source.
+        /// </summary>
+        /// <param name="source">Loads assets from a location and serializes to bytes.</param>
+        /// <param name="decoder">Deserializes a byte stream into the given type.</param>
+        /// <typeparam name="T"></typeparam>
         public void RegisterDecoded<T>(ISource<byte[]> source, IDecoder<T> decoder)
         {
             _registry[typeof(T)] = new SourceAdapter<T>(new DecodedSource<T>(source, decoder));
@@ -93,6 +118,16 @@ namespace N88.Loader
                     results.Add(decoded);
                 }
                 return results;
+            }
+
+            public bool TryRelease(string key)
+            {
+                return _source.TryRelease(key);
+            }
+
+            public void Dispose()
+            {
+                _source.Dispose();
             }
         }
 
@@ -128,9 +163,10 @@ namespace N88.Loader
     /// to type <see cref="T"/>.
     /// </summary>
     /// <typeparam name="T">The type of object to load, deserialize, and return.</typeparam>
-    public interface ISource<T>
+    public interface ISource<T> : IDisposable
     {
         Task<IReadOnlyList<T>> LoadAsync(string key, CancellationToken token);
+        bool TryRelease(string key);
     }
     
     /// <summary>

@@ -16,14 +16,24 @@ namespace N88.Loader.Tests
 			await Task.Delay(1, CancellationToken.None);
 			Assert.That(result.IsCanceled, Is.True);
 		}
-	}
-
-	public class MockSlowSource : ISource<string>
-	{
-		public async Task<IReadOnlyList<string>> LoadAsync(string key, CancellationToken token)
+		
+		private sealed class MockSlowSource : ISource<string>
 		{
-			await Task.Delay(5, token);
-			return new List<string> {key};
+			public async Task<IReadOnlyList<string>> LoadAsync(string key, CancellationToken token)
+			{
+				await Task.Delay(5, token);
+				return new List<string> {key};
+			}
+
+			public bool TryRelease(string key)
+			{
+				return true;
+			}
+
+			public void Dispose()
+			{
+				// nothing is loaded
+			}
 		}
 	}
 }
