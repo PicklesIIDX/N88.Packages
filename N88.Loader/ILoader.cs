@@ -11,5 +11,6 @@ namespace N88.Loader
     {
         Task<T> LoadAsync<T>(string key, CancellationToken token);
         Task<IReadOnlyList<T>> LoadAllAsync<T>(string key, CancellationToken token);
+        bool TryRelease<T>(string key);
     }
 }

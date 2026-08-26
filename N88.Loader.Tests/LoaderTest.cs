@@ -1,5 +1,7 @@
 namespace N88.Loader.Tests
 {
+	using NSubstitute;
+
 	[TestFixture]
 	[TestOf(typeof(Loader))]
 	public class LoaderTest
@@ -15,6 +17,18 @@ namespace N88.Loader.Tests
 			var result = loader.LoadAllAsync<string>("butts", source.Token);
 			await Task.Delay(1, CancellationToken.None);
 			Assert.That(result.IsCanceled, Is.True);
+		}
+
+		[Test]
+		public async Task TryRelease_when_asset_loaded_releases_asset()
+		{
+			var loader = new Loader();
+			var source = Substitute.For<ISource<string>>();
+			source.LoadAsync("butts", Arg.Any<CancellationToken>()).Returns(new List<string> { "butt" });
+			loader.Register(source);
+			await loader.LoadAsync<string>("butts", CancellationToken.None);
+			loader.TryRelease<string>("butts");
+			source.Received(1).TryRelease("butts");
 		}
 		
 		private sealed class MockSlowSource : ISource<string>

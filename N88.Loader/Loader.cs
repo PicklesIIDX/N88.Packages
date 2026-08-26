@@ -69,6 +69,11 @@ namespace N88.Loader
             return listOfItemsOfType;
         }
 
+        public bool TryRelease<T>(string key)
+        {
+            return _registry[typeof(T)].TryRelease(key);
+        }
+
         /// <summary>
         /// Assigns the given <see cref="source"/> to this object's collections for loading from. 
         /// </summary>
@@ -145,6 +150,11 @@ namespace N88.Loader
                 var resultList = resultObject.ToList();
                 return resultList;
             }
+
+            public bool TryRelease(string key)
+            {
+                return _inner.TryRelease(key);
+            }
         }
         
         /// <summary>
@@ -154,6 +164,7 @@ namespace N88.Loader
         private interface ISourceAdapter
         {
             Task<IReadOnlyList<object>> LoadAsync(string key, CancellationToken token);
+            bool TryRelease(string key);
         }
     }
     

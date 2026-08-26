@@ -7,7 +7,7 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Loader</RootNamespace>
         <PackageId>N88.Loader</PackageId>
-        <Version>2.0.1</Version>
+        <Version>3.0.0</Version>
         <Company>N88</Company>
         <Description>Generic asset loader.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
