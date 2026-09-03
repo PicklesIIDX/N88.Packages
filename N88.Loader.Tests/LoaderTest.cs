@@ -30,6 +30,15 @@ namespace N88.Loader.Tests
 			loader.TryRelease<string>("butts");
 			source.Received(1).TryRelease("butts");
 		}
+
+		[Test]
+		public void Register_when_type_registered_throws_argument_exception()
+		{
+			var loader = new Loader();
+			var source = Substitute.For<ISource<string>>();
+			loader.Register(source);
+			Assert.Throws<ArgumentException>(() => loader.Register(source));
+		}
 		
 		private sealed class MockSlowSource : ISource<string>
 		{

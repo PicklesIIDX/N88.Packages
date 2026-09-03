@@ -79,8 +79,13 @@ namespace N88.Loader
         /// </summary>
         /// <param name="source"></param>
         /// <typeparam name="T">The type that matches the lookup for the load request.</typeparam>
+        /// <exception cref="ArgumentException">Thrown if type T was already registered.</exception>
         public void Register<T>(ISource<T> source)
         {
+            if (_registry.ContainsKey(typeof(T)))
+            {
+                throw new ArgumentException($"type '{typeof(T).FullName}' is already registered");
+            }
             _registry[typeof(T)] 
                 = new SourceAdapter<T>(source);
         }

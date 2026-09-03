@@ -7,14 +7,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Loader</RootNamespace>
         <PackageId>N88.Loader</PackageId>
-        <Version>3.0.0</Version>
+        <Version>4.0.0</Version>
         <Company>N88</Company>
         <Description>Generic asset loader.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - ISource now implements disposable and expects the implementation to handle memory management
+            - Register throws an exception when registering the same type twice
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
