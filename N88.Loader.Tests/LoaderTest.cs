@@ -39,7 +39,53 @@ namespace N88.Loader.Tests
 			loader.Register(source);
 			Assert.Throws<ArgumentException>(() => loader.Register(source));
 		}
-		
+
+		[Test]
+		public async Task TryRelease_when_more_specific_type_releases()
+		{
+			var loader = new Loader();
+			var source = new FamilySource();
+			loader.Register(source);
+			await loader.LoadAllAsync<ChildClass>("baby", CancellationToken.None);
+			var released = loader.TryRelease<ChildClass>("baby");
+			Assert.That(released, Is.True);
+		}
+
+		private class ParentClass;
+
+		private class ChildClass : ParentClass;
+
+		private sealed class FamilySource : ISource<ParentClass>
+		{
+			private ChildClass? baby;
+			public void Dispose()
+			{
+				//
+			}
+
+			public Task<IReadOnlyList<ParentClass>> LoadAsync(string key, CancellationToken token)
+			{
+				if (key == "baby")
+				{
+					baby = new ChildClass();
+					return Task.FromResult<IReadOnlyList<ParentClass>>(new List<ParentClass> {baby});
+				}
+
+				throw new ArgumentException($"no item for {key}");
+			}
+
+			public bool TryRelease(string key)
+			{
+				if (key == "baby" && baby != null)
+				{
+					baby = null;
+					return true;
+				}
+
+				return false;
+			}
+		}
+
 		private sealed class MockSlowSource : ISource<string>
 		{
 			public async Task<IReadOnlyList<string>> LoadAsync(string key, CancellationToken token)

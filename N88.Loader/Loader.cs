@@ -47,31 +47,45 @@ namespace N88.Loader
         /// find the best match.</exception>
         public async Task<IReadOnlyList<T>> LoadAllAsync<T>(string key, CancellationToken token)
         {
-            if (!_registry.TryGetValue(typeof(T), out var bestAdapter))
-            {
-                Type? bestType = null;
-                foreach (var (registeredType, adapter) in _registry)
-                {
-                    if (!registeredType.IsAssignableFrom(typeof(T))) { continue; }
-                    if(bestType != null && !bestType.IsAssignableFrom(registeredType)) { continue; }
-                    bestType = registeredType;
-                    bestAdapter = adapter;
-                }
-
-                if (bestAdapter == null)
-                {
-                    throw new RegistrationException($"failed to find resolver for type '{typeof(T).FullName}' in {nameof(_registry)}");
-                }
-            }
+            var bestAdapter = FindBestMatchingSourceAdapter<T>();
             var items = await bestAdapter.LoadAsync(key, token);
             var itemsOfType = items.OfType<T>();
             var listOfItemsOfType = itemsOfType.ToList();
             return listOfItemsOfType;
         }
 
+        /// <summary>
+        /// Uses reflection to walk the dependency tree for the requested type <see cref="T"/>
+        /// and returns the best matching source adapter for the requested type.
+        /// </summary>
+        /// <typeparam name="T">Type to load.</typeparam>
+        /// <returns>Best matching source adapter that is a relative of <see cref="T"/></returns>
+        /// <exception cref="RegistrationException">If no matching type found.</exception>
+        private ISourceAdapter FindBestMatchingSourceAdapter<T>()
+        {
+            if (_registry.TryGetValue(typeof(T), out var bestAdapter)) { return bestAdapter; }
+            Type? bestType = null;
+            foreach (var (registeredType, adapter) in _registry)
+            {
+                if (!registeredType.IsAssignableFrom(typeof(T))) { continue; }
+                if(bestType != null && !bestType.IsAssignableFrom(registeredType)) { continue; }
+                bestType = registeredType;
+                bestAdapter = adapter;
+            }
+
+            if (bestAdapter == null)
+            {
+                throw new RegistrationException($"failed to find resolver for type '{typeof(T).FullName}' in {nameof(_registry)}." +
+                                                $" Please register a {nameof(ISource<T>)}.");
+            }
+
+            return bestAdapter;
+        }
+
         public bool TryRelease<T>(string key)
         {
-            return _registry[typeof(T)].TryRelease(key);
+            var bestAdapter = FindBestMatchingSourceAdapter<T>();
+            return bestAdapter.TryRelease(key);
         }
 
         /// <summary>

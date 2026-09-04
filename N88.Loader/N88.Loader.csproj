@@ -7,14 +7,14 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Loader</RootNamespace>
         <PackageId>N88.Loader</PackageId>
-        <Version>4.0.0</Version>
+        <Version>4.0.1</Version>
         <Company>N88</Company>
         <Description>Generic asset loader.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <PackageReleaseNotes>
-            - Register throws an exception when registering the same type twice
+            - TryRelease now uses the best match so exact types aren't required
         </PackageReleaseNotes>
         <PackageReadmeFile>README.md</PackageReadmeFile>
     </PropertyGroup>
