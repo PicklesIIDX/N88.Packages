@@ -39,6 +39,16 @@ namespace N88.Loader.Tests
 			loader.Register(source);
 			Assert.Throws<ArgumentException>(() => loader.Register(source));
 		}
+		
+		[Test]
+		public void RegisterDecoded_when_type_registered_throws_argument_exception()
+		{
+			var loader = new Loader();
+			var source = Substitute.For<ISource<byte[]>>();
+			var decoder = Substitute.For<IDecoder<string>>();
+			loader.RegisterDecoded(source, decoder);
+			Assert.Throws<ArgumentException>(() => loader.RegisterDecoded(source, decoder));
+		}
 
 		[Test]
 		public async Task TryRelease_when_more_specific_type_releases()

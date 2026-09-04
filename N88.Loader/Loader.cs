@@ -113,6 +113,10 @@ namespace N88.Loader
         /// <typeparam name="T"></typeparam>
         public void RegisterDecoded<T>(ISource<byte[]> source, IDecoder<T> decoder)
         {
+            if (_registry.ContainsKey(typeof(T)))
+            {
+                throw new ArgumentException($"type '{typeof(T).FullName}' is already registered");
+            }
             _registry[typeof(T)] = new SourceAdapter<T>(new DecodedSource<T>(source, decoder));
         }
 
