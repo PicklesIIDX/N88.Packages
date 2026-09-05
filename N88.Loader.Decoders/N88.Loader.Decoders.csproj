@@ -7,7 +7,8 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Loader.Decoders</RootNamespace>
         <PackageId>N88.Loader.Decoders</PackageId>
-        <Version>1.0.0</Version>
+        <Version>1.0.1</Version>
+        <VersionSuffix Condition="'$(Configuration)'=='Debug'">local$([System.DateTime]::Now.ToString(yyyyMMddHHmmss))</VersionSuffix>
         <Company>N88</Company>
         <Description>General Decoders for the N88.Loader</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -28,7 +29,7 @@
     </ItemGroup>
 
     <Target Name="PackAfterBuild" AfterTargets="Build">
-        <Exec Command="dotnet pack -o $(HOME)/dev/.localfeed"/>
+        <Exec Command="dotnet pack -c $(Configuration) --no-build -o $(HOME)/dev/.localfeed"/>
     </Target>
 
 </Project>

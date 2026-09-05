@@ -7,7 +7,8 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.Logging</RootNamespace>
         <PackageId>N88.Logging</PackageId>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
+        <VersionSuffix Condition="'$(Configuration)'=='Debug'">local$([System.DateTime]::Now.ToString(yyyyMMddHHmmss))</VersionSuffix>
         <Company>N88</Company>
         <Description>Category based logger.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -24,7 +25,7 @@
     </ItemGroup>
 
     <Target Name="PackAfterBuild" AfterTargets="Build">
-        <Exec Command="dotnet pack -o $(HOME)/dev/.localfeed"/>
+        <Exec Command="dotnet pack -c $(Configuration) --no-build -o $(HOME)/dev/.localfeed"/>
     </Target>
 
 </Project>

@@ -6,7 +6,8 @@
         <LangVersion>latest</LangVersion>
         <RootNamespace>N88.MessageBus</RootNamespace>
         <PackageId>N88.MessageBus</PackageId>
-        <Version>1.0.1</Version>
+        <Version>1.0.2</Version>
+        <VersionSuffix Condition="'$(Configuration)'=='Debug'">local$([System.DateTime]::Now.ToString(yyyyMMddHHmmss))</VersionSuffix>
         <Company>N88</Company>
         <Description>A Pub/Sub subscripton model.</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -23,7 +24,7 @@
     </ItemGroup>
 
     <Target Name="PackAfterBuild" AfterTargets="Build">
-        <Exec Command="dotnet pack -o $(HOME)/dev/.localfeed"/>
+        <Exec Command="dotnet pack -c $(Configuration) --no-build -o $(HOME)/dev/.localfeed"/>
     </Target>
 
 </Project>
